@@ -1,0 +1,19 @@
+{
+  "name": "15-Minutes-Recipe",
+  "version": "1.0.0",
+  "description": "Back-end to provide recipes",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": "https://github.com/Pextre/15-Minutes-Recipe.git",
+  "author": "Lucas Lima",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
