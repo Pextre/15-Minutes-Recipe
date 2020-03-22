@@ -9,18 +9,18 @@ export default function Main({ navigation }) {
     const [recipeText, setRecipeText] = useState("");
     const [counter, setCounter] = useState(0);
 
-    
+
     /**
      * Se vc quiser mudar o botao de adicionar que tem por um de atualizar 
      * coloca dentro desse array vazio uma variavel que representa quando 
      * o estado desse botao muda, assim sempre que alguem apertar nele o
      * aplicativo irar atualizar as receitas para o usuario
      */
-    useEffect(()=>{
+    useEffect(() => {
 
         async function loadRecipes() {
             const response = await api.get('/recipes');
-    
+
             if (response.status === STATUS_SUCESS) {
                 const recipes = response.data;
                 setRecipes(recipes);
@@ -45,12 +45,15 @@ export default function Main({ navigation }) {
             >
             </TextInput>
             <ScrollView style={styles.scrollContainer}>
-                {recipes.map((recipe) => (
+                {recipes.length === 0 ?
+                    <Text style={styles.noRecipe}>Não existe nenhuma receita ainda...</Text>
+                    :
+                    recipes.map((recipe) => (
 
-                    <Recipe key={recipe._id} recipe={recipe} navigation={navigation}>
+                        <Recipe key={recipe._id} recipe={recipe} navigation={navigation} />
 
-                    </Recipe>
-                ))}
+                    ))
+                }
             </ScrollView>
         </View>
     );
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         color: "#000",
         padding: 20,
         marginTop: 0,
-        marginBottom:0,
+        marginBottom: 0,
         backgroundColor: "#FFF",
         elevation: 2,
         borderTopColor: "#000",
@@ -87,5 +90,11 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
     },
-
+    noRecipe: {
+        position: "absolute",
+        top: 20,
+        left: 40,
+        right: 0,
+        fontSize: 20
+    }
 });
