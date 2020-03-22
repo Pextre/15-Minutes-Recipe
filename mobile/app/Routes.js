@@ -25,7 +25,7 @@ const Routes = createStackNavigator({
     }, {
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: "#FF7C44",
+                backgroundColor: "#9CC02E",
             },
             headerTintColor: "#fff",
             headerTitleAlign: "center",

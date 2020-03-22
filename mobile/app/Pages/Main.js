@@ -9,63 +9,36 @@ export default function Main({ navigation }) {
     const [recipeText, setRecipeText] = useState("");
     const [counter, setCounter] = useState(0);
 
-    const loadRecipes = async () => {
-        const response = await api.get('/recipes');
-
-        if (response.status === STATUS_SUCESS) {
-            const recipes = response.data;
-            setRecipes(recipes);
-        }
-        else {
-            // todo
-            console.log("Ver o que dar pra fazer")
-        }
-    }
+    
     /**
      * Se vc quiser mudar o botao de adicionar que tem por um de atualizar 
      * coloca dentro desse array vazio uma variavel que representa quando 
      * o estado desse botao muda, assim sempre que alguem apertar nele o
      * aplicativo irar atualizar as receitas para o usuario
      */
-    useEffect(loadRecipes, [recipes]);
+    useEffect(()=>{
 
-    function createDateString() {
-        let todaysDate = new Date();
-        return `date: ${todaysDate.getDay()}/${todaysDate.getMonth()}/${todaysDate.getFullYear()}`
-    }
-
-    function addRecipe() {
-        /* if(recipeText.trim()!==""){
-            setCounter(counter+1);
-            let recipe = {
-                name:recipeText,
-                key: counter,
-                date: createDateString(),
+        async function loadRecipes() {
+            const response = await api.get('/recipes');
+    
+            if (response.status === STATUS_SUCESS) {
+                const recipes = response.data;
+                setRecipes(recipes);
             }
-            setRecipes([...recipes, recipe]);
-            setRecipeText("");
-            textInput.clear()
-        } */
-        let recipe = []
-        for (let i = 0; i < 5; i++) {
-            recipe.push({
-                name: `Receita ${i}`,
-                key: i,
-                date: createDateString(),
-                ingredients: ["rice", "bean", "penaut"],
-                directions: ["rice", "bean", "penaut"]
-            });
+            else {
+                setRecipes([]);
+            }
         }
-        setRecipes([...recipes, ...recipe]);
-    }
 
+        loadRecipes();
+    }, []);
 
     return (
         <View style={styles.container} >
             <TextInput
                 style={styles.headerInput}
                 onChangeText={text => setRecipeText(text)}
-                placeholder="Digite aqui Nova Receita..."
+                placeholder="Pesquise sua receita aqui..."
                 placeholderTextColor="#000"
                 autoCorrect={false}
                 ref={input => { textInput = input }}
@@ -74,17 +47,11 @@ export default function Main({ navigation }) {
             <ScrollView style={styles.scrollContainer}>
                 {recipes.map((recipe) => (
 
-                    <Recipe key={recipe.key} recipe={recipe} navigation={navigation}>
+                    <Recipe key={recipe._id} recipe={recipe} navigation={navigation}>
 
                     </Recipe>
                 ))}
             </ScrollView>
-
-            <View style={styles.footer}>
-                <TouchableOpacity onPress={addRecipe} style={styles.addButton}>
-                    <Text style={styles.addButtonText}>+</Text>
-                </TouchableOpacity>
-            </View>
         </View>
     );
 }
@@ -92,7 +59,7 @@ export default function Main({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFE3C9"
+        backgroundColor: "#EEE"
     },
     headerInput:
     {
@@ -101,6 +68,7 @@ const styles = StyleSheet.create({
         color: "#000",
         padding: 20,
         marginTop: 0,
+        marginBottom:0,
         backgroundColor: "#FFF",
         elevation: 2,
         borderTopColor: "#000",
@@ -111,7 +79,6 @@ const styles = StyleSheet.create({
     scrollcontainer:
     {
         flex: 1,
-        marginBottom: 100,
     },
     footer:
     {
@@ -120,24 +87,5 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
     },
-    addButton:
-    {
-        position: "absolute"
-        , zIndex: 11,
-        right: 20,
-        bottom: 20,
-        backgroundColor: "#E91E63",
-        width: 65,
-        height: 65,
-        borderRadius: 50,
-        justifyContent: "center",
-        alignItems: "center",
-        elevation: 8,
-    },
-    addButtonText:
-    {
-        textAlign: "center",
-        color: "#fff",
-        fontSize: 24,
-    }
+
 });

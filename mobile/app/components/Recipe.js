@@ -5,7 +5,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function Recipe({ recipe, navigation }) {
     
     return (
-        <View key={recipe.key} style={styles.recipe}>
+        <View style={styles.recipe}>
             <Text style={styles.recipeTextName}>{recipe.name}</Text>
             <Text style={styles.recipeTextDate}>{recipe.date}</Text>
             <TouchableOpacity style={styles.navigationButton} onPress={()=>navigation.navigate("RecipeTutorial",{
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         position: "relative",
         padding: 20,
         paddingRight: 100,
-        backgroundColor: "#FFCE6F",
+        backgroundColor: "#91A840",
         borderRadius: 7,
         borderColor: "#000",
         borderWidth: 0.5,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 
     },
     recipeTextName: {
-        color: "#2A3C58",
+        color: "#EEFF00",
         fontSize: 20,
         fontWeight: "bold",
         paddingLeft: 20,

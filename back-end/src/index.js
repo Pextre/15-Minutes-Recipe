@@ -3,7 +3,7 @@ const App = express();
 
 
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/recipes", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://oministack:oministack@oministack-7rhd9.mongodb.net/oministack?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true });
 require("./models/Recipes");
 
 const recipes = require("./controllers/recipes");
