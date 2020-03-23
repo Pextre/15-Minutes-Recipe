@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { MaterialIcons } from "@expo/vector-icons";
 import Recipe from "../components/Recipe";
 import api from '../services/api';
 
@@ -9,25 +10,24 @@ export default function Main({ navigation }) {
     const [recipeText, setRecipeText] = useState("");
     const [counter, setCounter] = useState(0);
 
+/*
+*/
 
-    /**
-     * Se vc quiser mudar o botao de adicionar que tem por um de atualizar 
-     * coloca dentro desse array vazio uma variavel que representa quando 
-     * o estado desse botao muda, assim sempre que alguem apertar nele o
-     * aplicativo irar atualizar as receitas para o usuario
-     */
     useEffect(() => {
 
         async function loadRecipes() {
-            const response = await api.get('/recipes');
 
-            if (response.status === STATUS_SUCESS) {
-                const recipes = response.data;
-                setRecipes(recipes);
-            }
-            else {
-                setRecipes([]);
-            }
+                const response = await api.get('/recipes');
+
+                if (response.status === STATUS_SUCESS) {
+                    const recipes = response.data;
+                    setRecipes(recipes);
+                }
+                else {
+                    setRecipes([]);
+                }
+
+            
         }
 
         loadRecipes();
@@ -56,6 +56,7 @@ export default function Main({ navigation }) {
                 }
             </ScrollView>
         </View>
+        
     );
 }
 
@@ -74,8 +75,6 @@ const styles = StyleSheet.create({
         marginBottom: 0,
         backgroundColor: "#FFF",
         elevation: 2,
-        borderTopColor: "#000",
-        borderTopWidth: 1,
         borderBottomWidth: 5,
         borderBottomColor: "#ddd"
     },
@@ -96,5 +95,6 @@ const styles = StyleSheet.create({
         left: 40,
         right: 0,
         fontSize: 20
-    }
+    },
+    
 });
