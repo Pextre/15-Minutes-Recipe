@@ -1,14 +1,5 @@
-const mongoose = require('mongoose');
-
-/**
- * {
-    name: `Receita ${i}`,
-    key: i,
-    date: createDateString(),
-    ingredients: ["rice", "bean", "penaut"],
-    directions: ["rice", "bean", "penaut"]
-    }
- */
+const mongoose = require("mongoose");
+const mongoosePaginate = require("mongoose-paginate");
 
 const RecipesSchema = new mongoose.Schema({
   name: {
@@ -30,5 +21,7 @@ const RecipesSchema = new mongoose.Schema({
   ingredients: [String],
   directions: [String]
 });
+
+RecipesSchema.plugin(mongoosePaginate);
 
 mongoose.model("Recipes", RecipesSchema);
