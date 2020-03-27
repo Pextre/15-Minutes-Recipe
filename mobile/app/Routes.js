@@ -16,7 +16,7 @@ const Routes = createStackNavigator({
             screen: Main,
             navigationOptions: ({ navigate, navigation }) => ({
                 title:"15-minutes recipes",
-                headerRight: (
+                headerRight:()=> (
                   <TouchableOpacity
                     onPress={() => navigation.navigate("InfoPage")}
                   >
