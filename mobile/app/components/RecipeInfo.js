@@ -2,10 +2,8 @@ import React from "react";
 import { StyleSheet, Text,TouchableOpacity, View, Image, Linking } from 'react-native';
 
 export default function RecipeInfo({ recipeInfo }) {
-    //const imageURL = recipeInfo.receipeImageURL;
-    //const youtubeVideoURL = recipeInfo.youtubeVideoURL;
-    const imageURL = "https://cmkt-image-prd.freetls.fastly.net/0.1.0/ps/3270520/580/387/m1/fpnw/wm0/frenchfriescoversmaller-.jpg?1505771991&s=f1d914c445646c94b374cbc39ac80ab6";
-    const youtubeVideoURL = "https://www.youtube.com/watch?v=-L7o6HtX8Vg";
+    const imageURL = recipeInfo.receipeImageURL;
+    const youtubeVideoURL = recipeInfo.youtubeVideoURL;
     const recipeName = recipeInfo.recipeName;
 
     return (
