@@ -9,17 +9,18 @@ export default function Main({ navigation }) {
     const [recipeText, setRecipeText] = useState("");
     const [recipesInfo, setRecipesInfo] = useState({ page: "1", pages: 0 });
 
-    useEffect(() => {
-        async function loadRecipes(pageNumber = 1) {
+    async function loadRecipes(pageNumber = 1) {
 
-            const response = await api.get('/recipes', { params: { page: pageNumber } });
-            const { status, data } = response;
-            const { docs, page, pages } = data;
-            if (status === STATUS_SUCESS) {
-                setRecipes([...recipes, ...docs]);
-                setRecipesInfo({ page, pages });
-            }
+        const response = await api.get('/recipes', { params: { page: pageNumber } });
+        const { status, data } = response;
+        const { docs, page, pages } = data;
+        if (status === STATUS_SUCESS) {
+            setRecipes([...recipes, ...docs]);
+            setRecipesInfo({ page, pages });
         }
+    }
+    
+    useEffect(() => {
         loadRecipes();
     }, []);
 
